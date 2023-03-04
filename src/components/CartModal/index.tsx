@@ -1,11 +1,19 @@
+import { useContext, useState } from 'react';
 import { MdClose } from 'react-icons/md';
 import CartProductList from './CartProductList';
-
 import { StyledCartModalBox } from './style';
 import { StyledParagraph, StyledTitle } from '../../styles/typography';
+import { CardContext} from '../../contexts/CardContext/CardContext';
 
-const CartModal = () => (
-  <StyledCartModalBox>
+const CartModal = () => {
+
+  const {cardModal, setCardModal} = useContext(CardContext)
+  
+
+  
+  if (cardModal){
+    return (
+      <StyledCartModalBox>
     <dialog>
       <header>
         <StyledTitle tag='h2' $fontSize='three'>
@@ -14,9 +22,7 @@ const CartModal = () => (
         <button
           type='button'
           aria-label='Fechar'
-          onClick={() => {
-            console.log('Lógica aqui');
-          }}
+          onClick={() => setCardModal(false) }
         >
           <MdClose size={21} />
         </button>
@@ -33,6 +39,11 @@ const CartModal = () => (
       </div>
     </dialog>
   </StyledCartModalBox>
-);
+    )
+  }
+  return null
+     
+  
+};
 
 export default CartModal;
