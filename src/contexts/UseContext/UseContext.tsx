@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createContext, ReactNode, useEffect, useState} from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import {useNavigate} from 'react-router-dom'
 import { api } from "../../services/api";
 
@@ -26,6 +26,7 @@ interface IUserContextValue {
     UserRegister: (data: IUserRegister) => Promise<void>;
     UserLogin : (data : IUserLogin) => Promise<void> 
     user : IUser | null
+    LogOut :() => void
 }
 
 interface IUser {
@@ -89,10 +90,16 @@ export const Provider = ({children}:IProviderChildren) => {
         
     }, [])
 
+    const LogOut = ()=>{
+        localStorage.removeItem('user')
+        navigate('/')
+        
+    }
+
 
 
     return (
-        <UserContext.Provider value={{UserRegister, UserLogin, user}}>
+        <UserContext.Provider value={{UserRegister, UserLogin, user, LogOut}}>
             {children}
         </UserContext.Provider>
         )

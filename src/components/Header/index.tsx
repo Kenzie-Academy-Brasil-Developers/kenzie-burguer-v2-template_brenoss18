@@ -5,10 +5,12 @@ import { StyledHeader } from './style';
 import LogoKenzieBurguer from '../../assets/LogoKenzieBurguer.svg';
 import { StyledContainer } from '../../styles/grid';
 import { CardContext } from '../../contexts/CardContext/CardContext';
+import { UserContext } from '../../contexts/UseContext/UseContext';
 
 const Header = () => {
 
-  const {cardModal, setCardModal, LogOut} = useContext(CardContext)
+  const {setCardModal} = useContext(CardContext)
+  const {LogOut} = useContext(UserContext)
 
   return(
   <StyledHeader>
